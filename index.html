@@ -1,0 +1,819 @@
+<index.html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSURLEAD | On ne communique pas. On convertit.</title>
+    <meta name="description" content="Système d'acquisition automatisé pour agents d'assurance AXA, Allianz et courtiers.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Sora:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-accent: #111111;
+            --neon: #00ff00;
+            --neon-dim: rgba(0, 255, 0, 0.1);
+            --text: #ffffff;
+            --text-dim: #a0a0a0;
+            --font-sans: 'Sora', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 900;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo i {
+            color: var(--neon);
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 12rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--neon-dim));
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--neon-dim);
+            color: var(--neon);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.95;
+            font-weight: 900;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 span {
+            color: var(--neon);
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--neon);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background-color: #00cc00;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--neon);
+            color: var(--neon);
+        }
+
+        /* Partners */
+        .partners {
+            margin-top: 6rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .partners-label {
+            font-size: 0.6rem;
+            font-weight: 900;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .marquee {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: 4rem;
+        }
+
+        .marquee-content {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-around;
+            min-width: 100%;
+            gap: 4rem;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        .marquee span {
+            font-weight: 900;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ROI Calculator */
+        .section {
+            padding: 8rem 0;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .roi-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .calculator-card {
+            background: var(--bg-accent);
+            padding: 3rem;
+            border: 1px solid var(--border);
+        }
+
+        .input-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .input-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .input-header label {
+            font-size: 0.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+        }
+
+        .input-header span {
+            font-family: var(--font-mono);
+            color: var(--neon);
+            font-size: 0.9rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 2px;
+            background: #333;
+            appearance: none;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--neon);
+            cursor: pointer;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .result-item {
+            background: var(--bg);
+            padding: 2rem;
+        }
+
+        .result-label {
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .price-card {
+            background: var(--bg-accent);
+            padding: 3rem;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .price-card.featured {
+            border-color: var(--neon);
+            background: linear-gradient(180deg, rgba(0, 255, 0, 0.05), transparent);
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-card .price {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+        }
+
+        .price-card .price span {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-weight: 400;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin-bottom: 3rem;
+            flex-grow: 1;
+        }
+
+        .price-card li {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .price-card li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--neon);
+        }
+
+        /* Ticker */
+        .ticker {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+            transform: translateX(-150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .ticker.active {
+            transform: translateX(0);
+        }
+
+        .ticker-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--neon);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .ticker-info h4 {
+            font-size: 0.75rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .ticker-info p {
+            font-size: 0.6rem;
+            color: var(--neon);
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .footer-logo-desc {
+            max-width: 300px;
+        }
+
+        .footer-logo-desc p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 1.5rem;
+        }
+
+        .footer-links h4 {
+            font-size: 0.7rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon);
+        }
+
+        .copyright {
+            margin-top: 6rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>ASSUR<span style="color: var(--neon)">LEAD</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#offres">Offres</a>
+                <a href="#roi">Simulateur</a>
+                <a href="#methode">Méthode</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#contact" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.65rem;">Démarrer</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <span class="badge">Agent Digital 2026</span>
+            <h1>On ne communique pas. <br> <span>On convertit.</span></h1>
+            <p>Votre visibilité mérite des résultats. Nous construisons des systèmes d'acquisition automatisés pour les agents d'assurance et courtiers ambitieux.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="#contact" class="btn btn-primary">Lancer ma croissance <i class="fas fa-arrow-right"></i></a>
+                <a href="#roi" class="btn btn-outline">Simulateur ROI</a>
+            </div>
+
+            <div class="partners">
+                <span class="partners-label">Partenaires Stratégiques</span>
+                <div class="marquee">
+                    <div class="marquee-content">
+                        <span>AXA ASSURANCE</span>
+                        <span>ALLIANZ</span>
+                        <span>WAFA ASSURANCE</span>
+                        <span>RMA</span>
+                        <span>SAHAM</span>
+                        <span>ATLANTA</span>
+                    </div>
+                    <div class="marquee-content">
+                        <span>AXA ASSURANCE</span>
+                        <span>ALLIANZ</span>
+                        <span>WAFA ASSURANCE</span>
+                        <span>RMA</span>
+                        <span>SAHAM</span>
+                        <span>ATLANTA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roi" class="section">
+        <div class="container">
+            <div class="roi-grid">
+                <div>
+                    <span class="badge">Outil Prévisionnel</span>
+                    <h2 style="font-size: 3rem; margin-bottom: 2rem;">Projetez votre <span style="color: var(--neon)">Réussite.</span></h2>
+                    <p style="color: var(--text-dim); margin-bottom: 3rem;">Ajustez les paramètres pour visualiser l'impact direct de nos stratégies sur votre chiffre d'affaires mensuel.</p>
+                    
+                    <div class="calculator-card">
+                        <div class="input-group">
+                            <div class="input-header">
+                                <label>Budget Publicitaire Mensuel</label>
+                                <span id="budget-val">5 000 MAD</span>
+                            </div>
+                            <input type="range" id="budget" min="1000" max="50000" step="1000" value="5000">
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-header">
+                                <label>Coût par Lead (CPL)</label>
+                                <span id="cpl-val">15 MAD</span>
+                            </div>
+                            <input type="range" id="cpl" min="5" max="50" step="1" value="15">
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-header">
+                                <label>Taux de Conversion</label>
+                                <span id="conv-val">10%</span>
+                            </div>
+                            <input type="range" id="conv" min="1" max="30" step="1" value="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-label">Leads Générés</div>
+                        <div class="result-value" id="res-leads">333</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Ventes Estimées</div>
+                        <div class="result-value" id="res-sales">33</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2; border-top: 1px solid var(--border);">
+                        <div class="result-label">ROI Estimé</div>
+                        <div class="result-value" style="color: var(--neon)" id="res-roi">+690%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="offres" class="section" style="background-color: var(--bg-accent);">
+        <div class="container">
+            <div style="max-width: 600px; margin-bottom: 5rem;">
+                <span class="badge">Solutions d'Acquisition</span>
+                <h2 style="font-size: 3rem;">L'investissement <span style="color: var(--neon)">Rentable.</span></h2>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Mini Express</h3>
+                    <div class="price">1 200 <span>MAD</span></div>
+                    <ul>
+                        <li>Landing Page conversion</li>
+                        <li>Livraison 5 jours</li>
+                        <li>Capture de leads</li>
+                        <li>Design Responsive</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Démarrer</a>
+                </div>
+                
+                <div class="price-card featured">
+                    <h3>Growth</h3>
+                    <div class="price">2 400 <span>MAD</span></div>
+                    <ul>
+                        <li>SEO Local Avancé</li>
+                        <li>Campagne Meta Ads</li>
+                        <li>Reporting Hebdo</li>
+                        <li>Dashboard Live</li>
+                        <li>Optimisation CRO</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Accélérer</a>
+                </div>
+
+                <div class="price-card">
+                    <h3>Scale</h3>
+                    <div class="price">3 000 <span>MAD</span></div>
+                    <ul>
+                        <li>SEO Multi-villes</li>
+                        <li>Ads Multi-canaux</li>
+                        <li>Automation CRM</li>
+                        <li>Email Marketing</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Dominer</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <span class="badge">Contact</span>
+                <h2 style="font-size: 4rem; line-height: 1; margin-bottom: 2rem;">Parlons <span style="color: var(--neon)">Résultats.</span></h2>
+                <p style="color: var(--text-dim); margin-bottom: 4rem;">Notre équipe vous recontacte sous 24h pour un audit gratuit de votre présence digitale.</p>
+                
+                <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;">
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.6rem; font-weight: 900; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.5rem;">Email</div>
+                        <div style="font-weight: 900; font-size: 1.2rem;">contact@assurlead.ma</div>
+                    </div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.6rem; font-weight: 900; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.5rem;">Téléphone</div>
+                        <div style="font-weight: 900; font-size: 1.2rem;">07 07 57 31 62</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo-desc">
+                    <a href="#" class="logo">
+                        <i class="fas fa-chart-line"></i>
+                        <span>ASSUR<span style="color: var(--neon)">LEAD</span></span>
+                    </a>
+                    <p>L'ingénierie digitale au service des professionnels de l'assurance au Maroc.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#offres">Offres</a></li>
+                        <li><a href="#roi">Simulateur</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">Mentions Légales</a></li>
+                        <li><a href="#">CGV</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <span>© 2026 ASSURLEAD. PRECISION ENGINEERING.</span>
+                <div style="display: flex; gap: 2rem;">
+                    <a href="#" style="color: var(--text-dim); text-decoration: none;">LinkedIn</a>
+                    <a href="#" style="color: var(--text-dim); text-decoration: none;">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="ticker" class="ticker">
+        <div class="ticker-icon"><i class="fas fa-zap"></i></div>
+        <div class="ticker-info">
+            <h4 id="ticker-name">Ahmed B. vient de s'inscrire</h4>
+            <p id="ticker-meta">Casablanca • À l'instant</p>
+        </div>
+    </div>
+
+    <script>
+        // Navbar Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // ROI Calculator Logic
+        const budgetInput = document.getElementById('budget');
+        const cplInput = document.getElementById('cpl');
+        const convInput = document.getElementById('conv');
+
+        const budgetVal = document.getElementById('budget-val');
+        const cplVal = document.getElementById('cpl-val');
+        const convVal = document.getElementById('conv-val');
+
+        const resLeads = document.getElementById('res-leads');
+        const resSales = document.getElementById('res-sales');
+        const resRoi = document.getElementById('res-roi');
+
+        function updateCalculator() {
+            const budget = parseInt(budgetInput.value);
+            const cpl = parseInt(cplInput.value);
+            const conv = parseInt(convInput.value);
+            const avgCommission = 1200;
+
+            budgetVal.innerText = budget.toLocaleString() + ' MAD';
+            cplVal.innerText = cpl + ' MAD';
+            convVal.innerText = conv + '%';
+
+            const leads = Math.floor(budget / cpl);
+            const sales = Math.floor(leads * (conv / 100));
+            const revenue = sales * avgCommission;
+            const roi = budget > 0 ? ((revenue - budget) / budget) * 100 : 0;
+
+            resLeads.innerText = leads.toLocaleString();
+            resSales.innerText = sales.toLocaleString();
+            resRoi.innerText = '+' + roi.toFixed(0) + '%';
+        }
+
+        [budgetInput, cplInput, convInput].forEach(input => {
+            input.addEventListener('input', updateCalculator);
+        });
+
+        updateCalculator();
+
+        // Ticker Logic
+        const ticker = document.getElementById('ticker');
+        const tickerName = document.getElementById('ticker-name');
+        const tickerMeta = document.getElementById('ticker-meta');
+
+        const leads = [
+            { name: "Ahmed B.", city: "Casablanca", time: "à l'instant" },
+            { name: "Sara M.", city: "Rabat", time: "il y a 2 min" },
+            { name: "Youssef K.", city: "Marrakech", time: "il y a 5 min" },
+            { name: "Inès T.", city: "Tanger", time: "il y a 1 min" }
+        ];
+
+        function showTicker() {
+            const lead = leads[Math.floor(Math.random() * leads.length)];
+            tickerName.innerText = lead.name + " vient de s'inscrire";
+            tickerMeta.innerText = lead.city + " • " + lead.time;
+            
+            ticker.classList.add('active');
+            setTimeout(() => {
+                ticker.classList.remove('active');
+            }, 5000);
+        }
+
+        setInterval(showTicker, 15000);
+        setTimeout(showTicker, 3000);
+    </script>
+</body>
+</html>
